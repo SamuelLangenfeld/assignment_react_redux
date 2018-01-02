@@ -11,7 +11,8 @@ class App extends Component {
       <div className="App">
         <GroceryListContainer />
         <AddItemContainer />
-        <FilterButtonContainer />
+        <FilterButtonContainer filter="SHOW_ALL" />
+        <FilterButtonContainer filter="PURCHASED" />
       </div>
     );
   }
