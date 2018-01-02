@@ -5,11 +5,10 @@ import GroceryList from '../components/GroceryList'
 
 // Add puppies prop mapped from state.puppies
 const mapStateToProps = (state) => {
-  // Pass in all puppies and the value of the current filter
-  // to get the correct set of puppies to pass to props
-  console.log(state);
+  
   return {
-    groceries: state.groceryListReducer.items
+    groceries: state.groceryListReducer.items,
+    filter: state.groceryListFilterReducer.filter
   }
 }
 

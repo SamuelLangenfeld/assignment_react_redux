@@ -100,16 +100,11 @@ export function groceryListReducer(state = initialState, action) {
 export function groceryListFilterReducer(state = {filter: "SHOW_ALL"}, action) {
   switch (action.type) {
     case SET_FILTER:
-      if(action.data === "SHOW_ALL"){
-        return {
-          ...state,
-          displayArray: state.items.slice(0)
-        }
-      }
       return {
         ...state,
-        displayArray: state.items.filter(item => item.purchased)
-      }
+        filter: action.data
+      }      
+      
     default:
       return state;
   }
