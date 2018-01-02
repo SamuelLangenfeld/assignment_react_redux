@@ -3,6 +3,7 @@ import GroceryItem from './GroceryItem'
 
 const GroceryList = ({groceries}) => {
   // Generate the puppy card for each puppy
+  console.log(groceries);
   const groceryList = groceries.map((item) => (
     <GroceryItem
       item={item}
