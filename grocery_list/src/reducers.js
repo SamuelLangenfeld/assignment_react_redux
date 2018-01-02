@@ -83,7 +83,7 @@ export function groceryListReducer(state = initialState, action) {
       
       return {
         ...state,
-        displayArray: state.displayArray.slice(0).sort((a,b)=>{
+        items: state.displayArray.slice(0).sort((a,b)=>{
           
           if (a[sort.category].toUpperCase() > b[sort.category].toUpperCase()){
 
