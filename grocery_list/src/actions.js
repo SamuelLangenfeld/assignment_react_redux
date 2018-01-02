@@ -1,7 +1,8 @@
 export const ADD_ITEM = "ADD_ITEM";
 export const PURCHASE_ITEM = "PURCHASE_ITEM";
-export const SET_PURCHASED_FILTER = "SET_PURCHASED_FILTER";
+export const SET_FILTER = "SET_FILTER";
 export const SET_SORT = "SET_SORT";
+
 
 var counter = 3;
 
@@ -20,9 +21,9 @@ export function purchaseItem(id) {
   };
 }
 
-export function setPurchaseFilter(data) {
+export function setFilter(data) {
   return {
-    type: SET_PURCHASED_FILTER,
+    type: SET_FILTER,
     data: data
   };
 }
@@ -30,6 +31,7 @@ export function setPurchaseFilter(data) {
 export function sort(data){
   return{
     type: SET_SORT,
-    data:data
+    data: data
   }
 }
+

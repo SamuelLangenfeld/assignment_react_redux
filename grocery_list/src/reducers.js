@@ -1,9 +1,30 @@
 import {combineReducers} from "redux";
 
-import {ADD_ITEM, PURCHASE_ITEM, SET_PURCHASED_FILTER, SET_SORT} from "./actions";
+import {ADD_ITEM, PURCHASE_ITEM, SET_FILTER, SET_SORT} from "./actions";
 
 const initialState = {
   items: [
+    {
+      name: "apples",
+      description: "red fruits",
+      purchased: false,
+      id: 0
+    },
+    {
+      name: "oranges",
+      description: "orange fruits",
+      purchased: false,
+      id: 1
+    },
+    {
+      name: "bananas",
+      description: "yellow fruits",
+      purchased: false,
+      id: 2
+    }
+  ],
+
+  displayArray: [
     {
       name: "apples",
       description: "red fruits",
@@ -62,7 +83,7 @@ export function groceryListReducer(state = initialState, action) {
       
       return {
         ...state,
-        items: state.items.slice(0).sort((a,b)=>{
+        displayArray: state.displayArray.slice(0).sort((a,b)=>{
           
           if (a[sort.category].toUpperCase() > b[sort.category].toUpperCase()){
 
@@ -76,10 +97,19 @@ export function groceryListReducer(state = initialState, action) {
   }
 }
 
-export function groceryListFilterReducer(state = "SHOW_ALL", action) {
+export function groceryListFilterReducer(state = {filter: "SHOW_ALL"}, action) {
   switch (action.type) {
-    case SET_PURCHASED_FILTER:
-      return action.data;
+    case SET_FILTER:
+      if(action.data === "SHOW_ALL"){
+        return {
+          ...state,
+          displayArray: state.items.slice(0)
+        }
+      }
+      return {
+        ...state,
+        displayArray: state.items.filter(item => item.purchased)
+      }
     default:
       return state;
   }
