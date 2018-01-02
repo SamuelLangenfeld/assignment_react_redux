@@ -6,11 +6,11 @@ import {
   TRANSFER,
   SHOW_ALL,
   SHOW_ONE,
-  FILTER
+  FILTER,
+  SEARCH
 } from "./actions";
 
-const initialState = {
-  accounts: [
+const initialAccounts=[
     {
       id: 1,
       accountName: "capital one",
@@ -20,12 +20,17 @@ const initialState = {
     {
       id: 2,
       accountName: "bank of america",
-      amount: 99,
+      amount: 2099,
       transactions: []
     }
-  ],
+  ];
+
+const initialState = {
+  accounts: initialAccounts,
   recentAccountsView: [],
-  recentTransactionsView: []
+  recentTransactionsView: [],
+  displayAccounts: initialAccounts,
+  singleView: false
 };
 
 export function bankAccountReducer(state = initialState, action) {
@@ -104,18 +109,18 @@ export function bankAccountReducer(state = initialState, action) {
     case SHOW_ALL:
       return {
         ...state,
-        recentAccountsView: state.accounts.map(obj => obj)
+        singleView: false,
+        displayAccounts: state.accounts.slice(0)
       };
 
     case SHOW_ONE:
       return {
         ...state,
-        recentAccountsView: state.accounts
-          .map(obj => {
-            return obj;
-          })
+        singleView: true,
+        displayAccounts: state.accounts
+          .slice(0)
           .filter(account => {
-            if (account.id === action.data.id) {
+            if (account.id === Number(action.data.id)) {
               return true;
             }
             return false;
@@ -135,8 +140,13 @@ export function bankAccountReducer(state = initialState, action) {
               transaction.date <= action.data.endDate &&
               transaction.date >= action.data.startDate
             );
-        )
-      };
+      })
+    }
+
+    case SEARCH:
+      let regex = new RegExp(action.data.account, 'i');
+      let matches = state.accounts.filter(account=>regex.test(account.accountName))
+      return {...state, displayAccounts:matches, singleView:false}
     default:
       return state;
   }

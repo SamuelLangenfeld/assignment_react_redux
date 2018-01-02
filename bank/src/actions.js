@@ -4,6 +4,7 @@ export const TRANSFER = "TRANSFER";
 export const SHOW_ALL = "SHOW_ALL";
 export const SHOW_ONE = "SHOW_ONE";
 export const FILTER = "FILTER";
+export const SEARCH = "SEARCH";
 
 export function deposit(data) {
   //data will be {id, amount}
@@ -53,4 +54,11 @@ export function filter(data) {
     type: FILTER,
     data: data
   };
+}
+
+export function search(data) {
+  return{
+    type: SEARCH,
+    data: data
+  }
 }

@@ -8,12 +8,16 @@ import registerServiceWorker from "./registerServiceWorker";
 import {createStore} from "redux";
 import {bankApp} from "./reducers";
 import {deposit, withdraw, transfer, showAll, showOne, filter} from "./actions";
+import {Provider} from "react-redux"
 
 let store = createStore(bankApp);
+
 
 let unsubscribe = store.subscribe(() => {
   console.log(store.getState());
 });
+
+
 
 store.dispatch(
   deposit({
@@ -37,17 +41,6 @@ store.dispatch(
   })
 );
 
-store.dispatch(showAll({}));
 
-store.dispatch(showOne({id: 1}));
-
-store.dispatch(
-  filter({
-    id: 1,
-    startDate: new Date("2017-12-21"),
-    endDate: new Date("2017-12-22")
-  })
-);
-
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById("root"));
 registerServiceWorker();
